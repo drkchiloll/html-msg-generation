@@ -1,0 +1,17 @@
+{
+  "name": "html-gen",
+  "version": "1.0.0",
+  "description": "Play",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Womack",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "cheerio": "^0.20.0",
+    "csco-spark": "^3.0.9",
+    "html-pdf": "^1.5.0"
+  }
+}
