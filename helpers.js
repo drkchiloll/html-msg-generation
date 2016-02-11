@@ -23,3 +23,10 @@ exports.handleArrArr = (arrArr) => {
     return array;
   });
 };
+
+exports.handleEmails = (members) => members
+  .filter(member => member.personEmail)
+  .reduce((arr, member) => {
+    arr.push(member.personEmail);
+    return arr;
+  },[]);
