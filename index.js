@@ -8,7 +8,7 @@ var utils = require('./helpers');
 
 var sparkMsgs = [],
     roomMembers = [],
-    memPanel, roomTitle;
+    memPanel, htmlFinal, roomTitle;
 
 // utils.contactPanel(null);
 
@@ -20,6 +20,9 @@ utils.handleSprkList(Spark, 'messages').then((arrarr) => {
    return utils.handleSprkList(Spark, 'memberships').then((arrarr) => {
      roomMembers = utils.handleArrArr(arrarr);
      roomMembers = utils.handleEmails(roomMembers);
+     // I want to know some of the former members as well
+     // There are some who have POSTed messages but aren't current members
+     // To the Room
      return;
    })
 }).then(() => {
@@ -29,6 +32,7 @@ utils.handleSprkList(Spark, 'messages').then((arrarr) => {
   // Process the Top-Level Panel
   roomTitle = room.title;
   memPanel = utils.contactPanel(roomTitle, roomMembers);
+  htmlFinal = utils.msgPanel(memPanel, sparkMsgs);
 
-  console.log(utils.msgPanel(memPanel, sparkMsgs));
-})
+  utils.htmlToPdf(roomTitle, htmlFinal);
+});
