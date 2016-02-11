@@ -7,7 +7,8 @@ var utils = require('./helpers');
     roomid = config.room;
 
 var sparkMsgs = [],
-    roomMembers = [];
+    roomMembers = [],
+    memPanel, roomTitle;
 
 // utils.contactPanel(null);
 
@@ -18,11 +19,16 @@ utils.handleSprkList(Spark, 'messages').then((arrarr) => {
 }).then(() => {
    return utils.handleSprkList(Spark, 'memberships').then((arrarr) => {
      roomMembers = utils.handleArrArr(arrarr);
+     roomMembers = utils.handleEmails(roomMembers);
      return;
    })
 }).then(() => {
   // console.log(sparkMsgs);
-  roomMembers = utils.handleEmails(roomMembers);
-  utils.contactPanel(roomMembers);
+  return Spark.getRoom(roomid);
+}).then((room) => {
+  // Process the Top-Level Panel
+  roomTitle = room.title;
+  memPanel = utils.contactPanel(roomTitle, roomMembers);
 
-});
+  console.log(utils.msgPanel(memPanel, sparkMsgs));
+})
