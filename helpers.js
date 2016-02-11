@@ -1,4 +1,6 @@
-var Promise = require('bluebird');
+var Promise = require('bluebird'),
+    cheerio = require('cheerio'),
+    fs = require('fs');
 
 exports.handleSprkList = (Spark, item) => {
   var tempArr = [];
@@ -30,3 +32,13 @@ exports.handleEmails = (members) => members
     arr.push(member.personEmail);
     return arr;
   },[]);
+
+exports.contactPanel = (contacts) => {
+  var $ = cheerio.load(fs.readFileSync('index.html'));
+  $('h3#title').text('Generic Room');
+  var tdata = $('tbody#tblbody');
+  contacts.forEach(contact => {
+    tdata.append(`<tr><td>${contact}</td></tr>`);
+  });
+  console.log($.html());
+};
