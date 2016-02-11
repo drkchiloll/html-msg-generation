@@ -65,7 +65,7 @@ exports.msgPanel = (html, messages) => {
 exports.htmlToPdf = (title, html) => {
   pdf({
     cssPath: './node_modules/bootstrap/dist/css/bootstrap.css'
-  }).from.string(html).to('./${title}.pdf', () => {
+  }).from.string(html).to(`./${title}.pdf`, () => {
     console.log('finished');
   })
 };
