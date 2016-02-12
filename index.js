@@ -1,4 +1,4 @@
-var utils = require('./helpers');
+var utils = require('./utils');
     config = require('./config'),
     Spark = require('csco-spark')({
       uri:'https://api.ciscospark.com/v1',
@@ -33,6 +33,6 @@ utils.handleSprkList(Spark, 'messages').then((arrarr) => {
   roomTitle = room.title;
   memPanel = utils.contactPanel(roomTitle, roomMembers);
   htmlFinal = utils.msgPanel(memPanel, sparkMsgs);
-
-  utils.htmlToPdf(roomTitle, htmlFinal);
+  console.log(htmlFinal);
+  // utils.htmlToPdf(roomTitle, htmlFinal);
 });
